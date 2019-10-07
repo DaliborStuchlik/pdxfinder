@@ -11,7 +11,7 @@ import {SummaryInterface} from "./summary-interface";
 export class MappingService {
 
     private devServer = "http://ves-ebi-bc.ebi.ac.uk:8081";
-    private serverUrl =  "http://localhost:8081"; // this.devServer; //
+    private serverUrl =  "http://localhost:8080"; // this.devServer; //
 
     private _summaryUrl = this.serverUrl+"/api/mappings/summary";
     private _mappingsUrl = this.serverUrl+"/api/mappings";
@@ -64,6 +64,13 @@ export class MappingService {
         const url = `${this._mappingsUrl}?status=${status}`;
 
         return this.http.get<MappingInterface[]>(url);
+    }
+
+    getLoggedIn(status: string): Observable<any>{
+
+        const url = 'http://localhost:8080/user';
+
+        return this.http.get<any>(url);
     }
 
 
