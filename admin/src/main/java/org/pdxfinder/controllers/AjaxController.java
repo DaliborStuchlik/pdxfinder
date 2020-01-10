@@ -1,4 +1,4 @@
-package org.pdxfinder.admin.controllers;
+package org.pdxfinder.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
