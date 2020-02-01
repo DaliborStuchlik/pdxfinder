@@ -1,7 +1,6 @@
 package org.pdxfinder.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.io.FileUtils;
@@ -16,12 +15,9 @@ import org.pdxfinder.BaseTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -166,15 +162,6 @@ public class UtilityServiceTest extends BaseTest {
     }
 
 
-    private String resolvePath(String folder) {
-        return temporaryFolder
-                .getRoot().toPath()
-                .resolve(folder)
-                .toString();
-    }
-
-
-
     @Test
     public void given_SourceAndDestination_When_MoveFileInvoked_Then_FileIsMoved() throws IOException {
 
@@ -214,7 +201,7 @@ public class UtilityServiceTest extends BaseTest {
 
 
     @Test
-    public void given_FileDir_When_ListAllFilesInADirectoryInvoked_Then_FileIsMoved() throws IOException {
+    public void given_FileDir_When_ListAllFilesInADirectoryInvoked_Then_ReturnFileList() throws IOException {
 
         // given
         String fileNamePrefix = "tempFile";
@@ -294,5 +281,16 @@ public class UtilityServiceTest extends BaseTest {
         // Then
         assertEquals(expected, actual);
     }
+
+
+
+
+    private String resolvePath(String folder) {
+        return temporaryFolder
+                .getRoot().toPath()
+                .resolve(folder)
+                .toString();
+    }
+
 
 }
