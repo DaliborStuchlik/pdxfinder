@@ -11,79 +11,57 @@ import {SummaryInterface} from "./summary-interface";
 export class MappingService {
 
     private devServer = "http://ves-ebi-bc.ebi.ac.uk:8081";
-    private serverUrl = "http://localhost:8081";
-
+    private serverUrl = this.devServer; //"http://localhost:8081";
     private _summaryUrl = this.serverUrl+"/api/mappings/summary";
     private _mappingsUrl = this.serverUrl+"/api/mappings";
     public _exportUrl = this.serverUrl+"/api/mappings/export";
     private _uploadURL = this.serverUrl+"/api/mappings/uploads";
-
     public dataSubject = new Subject<any>();
-
     public stringDataBusSubject = new Subject<any>();
-
     public eventDataSubject = new Subject<any>();
-
     public errorReport = null;
-
     constructor(private http: HttpClient) { }
 
 
     getCurationSummary(maptype: string): Observable<SummaryInterface[]>{
-
         var curationType = (maptype == null) ? '' : `?entity-type=${maptype}`;
-
         const url = `${this._summaryUrl}${curationType}`;
-
         return this.http.get<SummaryInterface[]>(url);
     }
 
 
 
     getTerms(status: string, entityType: string, dataSource: string, page: string, size: string): Observable<MappingInterface[]>{
-
         const url = `${this._mappingsUrl}?mq=datasource:${dataSource}&entity-type=${entityType}&status=${status}&page=${page}&size=${size}`;
-
         return this.http.get<MappingInterface[]>(url);
     }
 
 
 
     getUnmappedTermsByType(entityType: string): Observable<MappingInterface[]>{
-
         const url = `${this._mappingsUrl}?entity-type=${entityType}&status=unmapped`;
-
         return this.http.get<MappingInterface[]>(url);
     }
 
 
     getTermsByStatus(status: string): Observable<MappingInterface[]>{
-
         const url = `${this._mappingsUrl}?status=${status}`;
-
         return this.http.get<MappingInterface[]>(url);
     }
 
     getLoggedIn(status: string): Observable<any>{
-
         const url = 'http://localhost:8080/user';
-
         return this.http.get<any>(url);
     }
 
 
 
     getManagedTerms(entityType: string, dataSource: string, page: string, size: string, status: string): Observable<MappingInterface[]>{
-
         var dsQuery = "";
         if (dataSource != null){
             dsQuery = `&mq=datasource:${dataSource}`;
         }
-
         const url = `${this._mappingsUrl}?entity-type=${entityType}&page=${page}&size=${size}&status=${status}${dsQuery}`;
-
-        console.log(url);
-
         return this.http.get<MappingInterface[]>(url);
     }
 
