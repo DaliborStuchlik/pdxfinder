@@ -11,13 +11,12 @@ import {SummaryInterface} from "./summary-interface";
 export class MappingService {
 
     private devServer = "http://ves-ebi-bc.ebi.ac.uk:8081";
-    private serverUrl =   this.devServer; // "http://localhost:8081"; //
+    private serverUrl = "http://localhost:8081";
 
     private _summaryUrl = this.serverUrl+"/api/mappings/summary";
     private _mappingsUrl = this.serverUrl+"/api/mappings";
     public _exportUrl = this.serverUrl+"/api/mappings/export";
     private _uploadURL = this.serverUrl+"/api/mappings/uploads";
-
 
     public dataSubject = new Subject<any>();
 
@@ -83,7 +82,7 @@ export class MappingService {
 
         const url = `${this._mappingsUrl}?entity-type=${entityType}&page=${page}&size=${size}&status=${status}${dsQuery}`;
 
-        //console.log(url);
+        console.log(url);
 
         return this.http.get<MappingInterface[]>(url);
     }
